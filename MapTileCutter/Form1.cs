@@ -56,14 +56,6 @@ namespace MapTileCutter
 
         private void MakeTilesButton_Click(object sender, EventArgs e)
         {
-            TotalOfTilesToGenerate = 0;
-            CurrentAmountOfTilesGenerated = 0;
-
-            string StructureFormat = structureComboBox.Text;
-            BackgroundColor = BackgroundColorTextBox.Text;
-            MapImage = (Bitmap)Bitmap.FromFile(MapImagePath.Text);
-            SaveFormat = TileFormat.Text;
-
             if (!int.TryParse(MaxZoomTextBox.Text, out MaxZoomLevel))
             {
                 MessageBox.Show("Max Zoom is not a integer!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -90,14 +82,24 @@ namespace MapTileCutter
 
             if(ExportPath.Text.Length == 0 || !Directory.Exists(ExportPath.Text))
             {
-                MessageBox.Show("Export path is empty or files does not exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Export path is empty or does not exists!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (!ColorConverter.IsValid(BackgroundColor))
+            if (!ColorConverter.IsValid(BackgroundColorTextBox.Text))
             {
                 MessageBox.Show("Background color is invalid.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);                
                 return;
             }
+
+            MakeTilesButton.Enabled = false;
+
+            TotalOfTilesToGenerate = 0;
+            CurrentAmountOfTilesGenerated = 0;
+
+            string StructureFormat = structureComboBox.Text;
+            BackgroundColor = BackgroundColorTextBox.Text;
+            MapImage = (Bitmap)Bitmap.FromFile(MapImagePath.Text);
+            SaveFormat = TileFormat.Text;
 
             ExportPathValue = ExportPath.Text;
 
@@ -141,6 +143,7 @@ namespace MapTileCutter
 
                     MapImage = CropImage(MapImage, new Rectangle(0, 0, MapImage.Width, MapImage.Height), new Rectangle(0, 0, MapImage.Width / 2, MapImage.Height / 2));
                 }
+                MakeTilesButton.Enabled = true;
                 MapImage.Dispose();
             });
             

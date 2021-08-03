@@ -30,10 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.MapImagePath = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.MakeTilesButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.BackgroundColorTextBox = new System.Windows.Forms.TextBox();
+            this.BackgroundColorLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.MinZoomTextBox = new System.Windows.Forms.TextBox();
             this.MaxZoomTextBox = new System.Windows.Forms.TextBox();
@@ -52,18 +56,14 @@
             this.exportPathButton = new System.Windows.Forms.Button();
             this.ExportPath = new System.Windows.Forms.TextBox();
             this.ProgressLabel = new System.Windows.Forms.Label();
-            this.BackgroundColorLabel = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.BackgroundColorTextBox = new System.Windows.Forms.TextBox();
             this.BackgroundColorTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -80,6 +80,15 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Map Image";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(8, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(79, 19);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Image path";
             // 
             // button1
             // 
@@ -101,16 +110,16 @@
             this.MapImagePath.Size = new System.Drawing.Size(689, 27);
             this.MapImagePath.TabIndex = 0;
             // 
-            // button2
+            // MakeTilesButton
             // 
-            this.button2.Location = new System.Drawing.Point(832, 257);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 30);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Make Tiles";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.MakeTilesButton_Click);
+            this.MakeTilesButton.Location = new System.Drawing.Point(832, 257);
+            this.MakeTilesButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MakeTilesButton.Name = "MakeTilesButton";
+            this.MakeTilesButton.Size = new System.Drawing.Size(87, 30);
+            this.MakeTilesButton.TabIndex = 1;
+            this.MakeTilesButton.Text = "Make Tiles";
+            this.MakeTilesButton.UseVisualStyleBackColor = true;
+            this.MakeTilesButton.Click += new System.EventHandler(this.MakeTilesButton_Click);
             // 
             // groupBox2
             // 
@@ -131,6 +140,33 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Export Options";
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.BackgroundColorTextBox);
+            this.panel5.Controls.Add(this.BackgroundColorLabel);
+            this.panel5.Location = new System.Drawing.Point(295, 98);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(232, 46);
+            this.panel5.TabIndex = 9;
+            // 
+            // BackgroundColorTextBox
+            // 
+            this.BackgroundColorTextBox.Location = new System.Drawing.Point(126, 12);
+            this.BackgroundColorTextBox.Name = "BackgroundColorTextBox";
+            this.BackgroundColorTextBox.Size = new System.Drawing.Size(92, 25);
+            this.BackgroundColorTextBox.TabIndex = 9;
+            this.BackgroundColorTextBox.Text = "#00FFFFFF";
+            // 
+            // BackgroundColorLabel
+            // 
+            this.BackgroundColorLabel.AutoSize = true;
+            this.BackgroundColorLabel.Location = new System.Drawing.Point(3, 14);
+            this.BackgroundColorLabel.Name = "BackgroundColorLabel";
+            this.BackgroundColorLabel.Size = new System.Drawing.Size(116, 19);
+            this.BackgroundColorLabel.TabIndex = 8;
+            this.BackgroundColorLabel.Text = "Background color";
+            this.BackgroundColorLabel.MouseHover += new System.EventHandler(this.ShowTooltip_MouseHover);
             // 
             // panel4
             // 
@@ -297,52 +333,16 @@
             // ProgressLabel
             // 
             this.ProgressLabel.AutoSize = true;
-            this.ProgressLabel.Location = new System.Drawing.Point(12, 284);
+            this.ProgressLabel.Location = new System.Drawing.Point(22, 264);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(0, 19);
             this.ProgressLabel.TabIndex = 3;
-            // 
-            // BackgroundColorLabel
-            // 
-            this.BackgroundColorLabel.AutoSize = true;
-            this.BackgroundColorLabel.Location = new System.Drawing.Point(3, 14);
-            this.BackgroundColorLabel.Name = "BackgroundColorLabel";
-            this.BackgroundColorLabel.Size = new System.Drawing.Size(116, 19);
-            this.BackgroundColorLabel.TabIndex = 8;
-            this.BackgroundColorLabel.Text = "Background color";
-            this.BackgroundColorLabel.MouseHover += new System.EventHandler(this.ShowTooltip_MouseHover);
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.BackgroundColorTextBox);
-            this.panel5.Controls.Add(this.BackgroundColorLabel);
-            this.panel5.Location = new System.Drawing.Point(295, 98);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(232, 46);
-            this.panel5.TabIndex = 9;
-            // 
-            // BackgroundColorTextBox
-            // 
-            this.BackgroundColorTextBox.Location = new System.Drawing.Point(126, 12);
-            this.BackgroundColorTextBox.Name = "BackgroundColorTextBox";
-            this.BackgroundColorTextBox.Size = new System.Drawing.Size(92, 25);
-            this.BackgroundColorTextBox.TabIndex = 9;
-            this.BackgroundColorTextBox.Text = "#00FFFFFF";
             // 
             // BackgroundColorTooltip
             // 
             this.BackgroundColorTooltip.AutoPopDelay = 5000;
             this.BackgroundColorTooltip.InitialDelay = 50;
             this.BackgroundColorTooltip.ReshowDelay = 100;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 31);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 19);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Image path";
             // 
             // Form1
             // 
@@ -351,7 +351,7 @@
             this.ClientSize = new System.Drawing.Size(933, 298);
             this.Controls.Add(this.ProgressLabel);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.MakeTilesButton);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -364,6 +364,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -372,8 +374,6 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -384,7 +384,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox MapImagePath;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button MakeTilesButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button exportPathButton;
         private System.Windows.Forms.TextBox ExportPath;
