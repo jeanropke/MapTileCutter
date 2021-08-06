@@ -38,12 +38,6 @@ namespace MapTileCutter
                     MapImage?.Dispose();
 
                     MapImagePath.Text = openFileDialog.FileName;
-
-                    MapImage = (Bitmap)Bitmap.FromFile(MapImagePath.Text);
-                    if(MapImage.Width % 256 != 0 || MapImage.Height % 256 != 0)
-                    {
-                        MessageBox.Show("This image is not divisible by 256. Some weird behaviors may occur!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
                 }
             }    
         }
@@ -97,8 +91,11 @@ namespace MapTileCutter
 
             string StructureFormat = structureComboBox.Text;
             BackgroundColor = BackgroundColorTextBox.Text;
-            MapImage = (Bitmap)Bitmap.FromFile(MapImagePath.Text);
-            MapImage = CropImage(MapImage, new Rectangle(0, 0, MapImage.Width, MapImage.Height), new Rectangle(0, 0, MapImage.Width, MapImage.Height));
+
+            var image = (Bitmap)Bitmap.FromFile(MapImagePath.Text);
+            MapImage = CropImage(image, new Rectangle(0, 0, image.Width, image.Height), new Rectangle(0, 0, image.Width, image.Height));
+            image.Dispose();
+
             SaveFormat = TileFormat.Text;
 
             ExportPathValue = ExportPath.Text;
@@ -126,13 +123,13 @@ namespace MapTileCutter
                         for (int y = 0; y < Math.Ceiling((double)MapImage.Height / TileSize); y++)
                         {
                             var rectangle = new Rectangle(x * TileSize, y * TileSize, TileSize, TileSize);
-
+                
                             Tile tile = new Tile(rectangle, PixelFormat.Format32bppArgb)
                             {
                                 Name = $"{StructureFormat.Replace("x", x.ToString()).Replace("y", y.ToString()).Replace("z", zoomLevel.ToString()).Split('.')[0]}.{SaveFormat.ToLower()}",
                                 Format = SaveFormat == "PNG" ? ImageFormat.Png : ImageFormat.Jpeg
                             };
-
+                
                             tile.TileSaved += Tile_TileSaved;
                             tile.Save();
                         }
@@ -142,6 +139,7 @@ namespace MapTileCutter
                 }
                 MakeTilesButton.Invoke(new MethodInvoker(delegate { MakeTilesButton.Enabled = true; }));
                 MapImage.Dispose();
+                GC.Collect();
             });
             
 
