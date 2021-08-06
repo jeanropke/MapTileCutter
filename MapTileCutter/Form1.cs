@@ -17,8 +17,7 @@ namespace MapTileCutter
         private static int MaxZoomLevel, MinZoomLevel, TileSize;
         private static ColorConverter ColorConverter = new ColorConverter();
 
-
-        public static int TotalOfTilesToGenerate;
+        private static int TotalOfTilesToGenerate;
         private static int CurrentAmountOfTilesGenerated;
 
         public Form1()
@@ -99,6 +98,7 @@ namespace MapTileCutter
             string StructureFormat = structureComboBox.Text;
             BackgroundColor = BackgroundColorTextBox.Text;
             MapImage = (Bitmap)Bitmap.FromFile(MapImagePath.Text);
+            MapImage = CropImage(MapImage, new Rectangle(0, 0, MapImage.Width, MapImage.Height), new Rectangle(0, 0, MapImage.Width, MapImage.Height));
             SaveFormat = TileFormat.Text;
 
             ExportPathValue = ExportPath.Text;
@@ -108,7 +108,6 @@ namespace MapTileCutter
 
             for (int i = MinZoomLevel; i <= MaxZoomLevel; i++)
             {
-
                 TotalOfTilesToGenerate += int.Parse((Math.Ceiling(_width / TileSize) * Math.Ceiling(_height / TileSize)).ToString());
 
                 _width /= 2;
@@ -135,15 +134,13 @@ namespace MapTileCutter
                             };
 
                             tile.TileSaved += Tile_TileSaved;
-
                             tile.Save();
-
                         }
                     }
 
                     MapImage = CropImage(MapImage, new Rectangle(0, 0, MapImage.Width, MapImage.Height), new Rectangle(0, 0, MapImage.Width / 2, MapImage.Height / 2));
                 }
-                MakeTilesButton.Enabled = true;
+                MakeTilesButton.Invoke(new MethodInvoker(delegate { MakeTilesButton.Enabled = true; }));
                 MapImage.Dispose();
             });
             
